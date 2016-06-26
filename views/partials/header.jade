@@ -7,8 +7,7 @@
         span.icon-bar
         span.icon-bar
       a.navbar-brand(href='/')
-        i.fa.fa-cube
-        | Botlyzer
+        img(src="img/botlizer-red.png" style="height: 50px")
     .collapse.navbar-collapse
       ul.nav.navbar-nav
         li(class=(title == 'Home') ? 'active' : undefined)
@@ -27,6 +26,7 @@
           li(class=(title == 'Create Account') ? 'active' : undefined)
             a(href='/signup') Create Account
         else
+          input(type='hidden' class="userid" val="#{user.id}")
           li.dropdown(class=(title == 'Account Management') ? 'active' : undefined)
             a.dropdown-toggle(href='#', data-toggle='dropdown')
               if user.profile.picture

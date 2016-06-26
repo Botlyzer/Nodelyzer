@@ -6,6 +6,10 @@ a, a:visited {
   color:#333;
 }
 
+.bubble-label-name{
+  font-size: 16px;
+}
+
 #container {
   padding-top:20px;
   width: 980px;
@@ -95,4 +99,3 @@ footer p {
   padding-bottom:20px;
   font: 13px sans-serif;
 }
-

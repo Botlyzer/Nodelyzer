@@ -2,6 +2,7 @@ var csvWriter = require('csv-write-stream')
 var mongoose = require('mongoose')
 var fs = require('fs')
 var writer = csvWriter({ headers: ["name","word","count"]})
+var request = require('request-json');
 
 /**
  * GET /
@@ -45,16 +46,19 @@ exports.getPopularWords = (req, res) => {
 
 exports.getPrediction = (req, res) => {
   var userid =  req.user._id ;//req.body.userid;
-  var client = request.createClient('http://requestb.in');
-
-
+  var client = request.createClient('http://hec44.pythonanywhere.com');
 
   mongoose.model('Chatsession').find({userid: userid}, function (err, chatsession) {
               if (err) {
                   return console.error(err);
               } else {
-                  client.post('/1j5cghb1', chatsession, function(err, response, body) {
-                    res.send(response.statusCode);
+                  client.post('/', chatsession, function(err, response, body) {
+                    console.log(response.body);
+                    fs.writeFile('public/data/feeling.json', JSON.stringify(response.body), function (err) {
+                      if (err) return console.log(err);
+                      console.log('Hello World > helloworld.txt');
+                    });
+                    res.send("Hola");
                   });
               }
         });

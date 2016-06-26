@@ -43,6 +43,22 @@ exports.getPopularWords = (req, res) => {
   }
 };
 
+exports.getPrediction = (req, res) => {
+  var userid =  req.user._id ;//req.body.userid;
+  var client = request.createClient('http://requestb.in');
+
+
+
+  mongoose.model('Chatsession').find({userid: userid}, function (err, chatsession) {
+              if (err) {
+                  return console.error(err);
+              } else {
+                  client.post('/1j5cghb1', chatsession, function(err, response, body) {
+                    res.send(response.statusCode);
+                  });
+              }
+        });
+};
 
 function foo(arr) {
     var a = [], b = [], prev;

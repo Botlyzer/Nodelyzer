@@ -172,11 +172,14 @@ app.post('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuth
  */
 
 app.get('/api/v1/chatsession', apiChatsessionController.index);
+app.get('/api/v1/chatsession/analysis', apiChatsessionController.analysis);
+
 app.post('/api/v1/chatsession', apiChatsessionController.postChatsession);
 
 app.get('/api/v1/user', apiUserController.index);
 
 app.get('/api/v1/message', apiMessageController.index);
+
 //app.post('/api/v1/message', messageController.postMessage);
 
 /**

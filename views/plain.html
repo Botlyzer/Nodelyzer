@@ -1,5 +1,34 @@
 <!DOCTYPE html>
 <head>
+
+  <script src="js/libs/d3.js" charset="utf-8"></script>
+  <script src='js/MG.js'></script>
+  <script src=' js/common/data_graphic.js'></script>
+  <script src='js/common/hooks.js'></script>
+  <script src='js/common/register.js'></script>
+  <script src='js/common/bootstrap_tooltip_popover.js'></script>
+  <script src='js/common/chart_title.js'></script>
+  <script src='js/common/y_axis.js'></script>
+  <script src='js/common/x_axis.js'></script>
+  <script src='js/common/init.js'></script>
+  <script src='js/common/markers.js'></script>
+  <script src='js/common/rollover.js'></script>
+  <script src='js/common/window_listeners.js'></script>
+  <script src='js/layout/bootstrap_dropdown.js'></script>
+  <script src='js/layout/button.js'></script>
+  <script src='js/charts/line.js'></script>
+  <script src='js/charts/histogram.js'></script>
+  <script src='js/charts/point.js'></script>
+  <script src='js/charts/bar.js'></script>
+  <script src='js/charts/table.js'></script>
+  <script src='js/charts/missing.js'></script>
+  <script src='js/misc/process.js'></script>
+  <script src='js/misc/smoothers.js'></script>
+  <script src='js/misc/formatters.js'></script>
+  <script src='js/misc/transitions.js'></script>
+  <script src='js/misc/utility.js'></script>
+  <script src='js/misc/error.js'></script>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
@@ -40,6 +69,45 @@
   <script type="text/coffeescript" src="coffee/vis.coffee"></script>
   <script type="text/javascript">
   </script>
+
+  <div id='g1'></div>
+    <script>
+    d3.json('data/fake_users1.json', function(data) {
+    data = MG.convert.date(data, 'date');
+    MG.data_graphic({
+        title: "Line Chart",
+        description: "This is a simple line chart. You can remove the area portion by adding area: false to the arguments list.",
+        data: data,
+        width: 700,
+        height: 300,
+        right: 40,
+        target: '#g1',
+        x_accessor: 'date',
+        y_accessor: 'value'
+    });
+});
+    </script>
+
+    <div id='g2'></div>
+      <script>
+      d3.json('data/confidence_band.json', function(data) {
+    data = MG.convert.date(data, 'date');
+    MG.data_graphic({
+        title: "Confidence Band",
+        description: "This is an example of a graphic with a confidence band and extended x-axis ticks enabled.",
+        data: data,
+        format: 'percentage',
+        width: 600,
+        height: 200,
+        right: 40,
+        area: false,
+        target: '#g2',
+        show_secondary_x_label: false,
+        show_confidence_band: ['l', 'u'],
+        x_extended_ticks: true
+    });
+});
+      </script>
 
 
   <!--[if lt IE 7 ]>

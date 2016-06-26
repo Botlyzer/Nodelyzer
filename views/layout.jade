@@ -6,7 +6,7 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='theme-color' content='#4DA5F4')
     meta(name='csrf-token', content=_csrf)
-    title #{title} - Hackathon Starter
+    title #{title} - Botlyzer
     link(rel='shortcut icon', href='/favicon.png')
     link(rel='stylesheet', href='/css/main.css')
 
@@ -16,12 +16,19 @@ html
     .container
       include partials/flash
       block content
+      block mydata
 
     include partials/footer
 
     script(src='/js/lib/jquery-2.2.0.min.js')
     script(src='/js/lib/bootstrap.min.js')
     script(src='/js/main.js')
+    script(src='js/libs/modernizr-2.0.6.min.js')
+    script(src='js/plugins.js')
+    script(src='js/libs/coffee-script.js')
+    script(src='js/libs/d3.min.js')
+    script(src='coffee/vis.coffee' type='text/coffeescript')
+    script(type='text/javascript')
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID
     script.

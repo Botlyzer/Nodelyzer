@@ -1,9 +1,9 @@
 {
-  "name": "hackathon-starter",
+  "name": "Botlyzer",
   "version": "4.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sahat/hackathon-starter.git"
+    "url": "https://github.com/Botlyzer/Nodelyzer.git"
   },
   "scripts": {
     "start": "node app.js",

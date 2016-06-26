@@ -309,6 +309,12 @@ exports.getForgot = (req, res) => {
   });
 };
 
+exports.getUGraphs = (req, res) => {
+  res.render('usergraphs', {
+    title: 'User Graphs'
+  });
+};
+
 /**
  * POST /forgot
  * Create a random token, then the send user an email with a reset link.

@@ -6,11 +6,20 @@ const User = require('./User');
 
 const chatsessionSchema = new mongoose.Schema({
   userid: { type: Schema.Types.ObjectId, ref: 'User' },
-  chat: [{
-    time: {type: Date},
-    author: { type: String, default: '' },
-    message: { type: String, default: '' }
-  }]
+  chat:
+  [
+    { bot:
+      {
+        time: {type: Date},
+        message: { type: String, default: '' }
+      },
+      user:
+      {
+        time: {type: Date},
+        message: { type: String, default: '' }
+      }
+    }
+  ]
 }, { timestamps: true });
 
 

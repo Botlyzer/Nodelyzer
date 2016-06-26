@@ -1,5 +1,7 @@
 var mongoose = require('mongoose'); //mongo connection
 var bodyParser = require('body-parser'); //parses information from POST
+var request = require('request-json');
+
 const Chatsession = require('../../../models/Chatsession');
 
 
@@ -21,6 +23,24 @@ exports.index = (req, res) => {
                 });
               }
         });
+};
+
+exports.analysis = (req, res) => {
+  var userid =  "576f665d6eaa033b275216d2";//req.body.userid;
+  var client = request.createClient('http://requestb.in');
+
+
+
+  mongoose.model('Chatsession').find({userid: userid}, function (err, chatsession) {
+              if (err) {
+                  return console.error(err);
+              } else {
+                  client.post('/1j5cghb1', chatsession, function(err, response, body) {
+                    res.send(response.statusCode);
+                  });
+              }
+        });
+
 };
 
 exports.postChatsession = (req, res) => {

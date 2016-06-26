@@ -19,6 +19,7 @@ const sass = require('node-sass-middleware');
 const multer = require('multer');
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
+
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
@@ -31,6 +32,9 @@ const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
+const apiMessageController = require('./controllers/api/v1/message');
+const apiUserController = require('./controllers/api/v1/user');
+const apiChatsessionController = require('./controllers/api/v1/chatsession');
 
 /**
  * API keys and Passport configuration.
@@ -41,6 +45,7 @@ const passportConfig = require('./config/passport');
  * Create Express server.
  */
 const app = express();
+
 
 /**
  * Connect to MongoDB.
@@ -78,15 +83,16 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+/*
 app.use((req, res, next) => {
   if (req.path === '/api/upload') {
     next();
   } else {
     lusca.csrf()(req, res, next);
   }
-});
-app.use(lusca.xframe('SAMEORIGIN'));
-app.use(lusca.xssProtection(true));
+}); */
+//app.use(lusca.xframe('SAMEORIGIN'));
+app.use(lusca.xssProtection(false));
 app.use((req, res, next) => {
   res.locals.user = req.user;
   next();
@@ -124,6 +130,7 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 /**
  * API examples routes.
  */
+
 app.get('/api', apiController.getApi);
 app.get('/api/lastfm', apiController.getLastfm);
 app.get('/api/nyt', apiController.getNewYorkTimes);
@@ -157,6 +164,19 @@ app.get('/api/upload', apiController.getFileUpload);
 app.post('/api/upload', upload.single('myFile'), apiController.postFileUpload);
 app.get('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getPinterest);
 app.post('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postPinterest);
+
+
+/**
+ * API Botlyzer routes.
+ */
+
+app.get('/api/v1/chatsession', apiChatsessionController.index);
+app.post('/api/v1/chatsession', apiChatsessionController.postChatsession);
+
+app.get('/api/v1/user', apiUserController.index);
+
+app.get('/api/v1/message', apiMessageController.index);
+//app.post('/api/v1/message', messageController.postMessage);
 
 /**
  * OAuth authentication routes. (Sign in)
